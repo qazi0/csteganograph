@@ -8,10 +8,8 @@ This simple tool allows embedding a text message into a .PGM Image file, using r
 ### Compiling
 To compile with gcc
 ```
-gcc image.c main.c -o csteganograph
+user@domain:~# gcc image.c main.c -o csteganograph
 ```
-
-### Usage
 
 ## Encoding
 To encode a text message, use syntax:
