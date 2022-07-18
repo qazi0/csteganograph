@@ -23,10 +23,6 @@ ImagePGM *readPGM(char *filename) {
     }
 
     skip_comment_lines(pgmFile);
-    //fscanf(pgmFile, "%d", &data->width);
-    //skip_comment_lines(pgmFile);
-    //fscanf(pgmFile, "%d", &data->height);
-    //skip_comment_lines(pgmFile);
     fscanf(pgmFile, "%d %d %d", &data->width, &data->height, &data->max_value);
     //fgetc(pgmFile);
 
@@ -38,13 +34,6 @@ ImagePGM *readPGM(char *filename) {
 
     //printf("\n Malloc'ed.\n");
 
-    //int* data2 = (int*)malloc((data->width)*(data->height)*sizeof(int));
-    /*
-    for(int i=0;i<(data->height)*(data->width);i++) {
-        fscanf(pgmFile, "%d", &data2[i]);
-    }
-
-     */
     printf("\n data->height = %d data->width = %d\n", data->height, data->width);
     //printf("\n Gonna enter for-loop zoneZ\n");
     for (int i = 0; i < data->height; ++i) {
@@ -55,25 +44,6 @@ ImagePGM *readPGM(char *filename) {
 
     fclose(pgmFile);
     printf("\n File read and closed.\n");
-    /*
-     //If for max val < 255 its 1 byte else 2 bytes
-     if(data->max_value<256)
-     {
-         for(i=0;i<data->height;i++)
-             for(j=0;j<data->width;j++)
-                 data2[ j + i * (data->width)] = (int) get_num(pgmFile);
-     }
-
-     else {
-         for(i=0;i<data->height;i++)
-             for(j=0;j<data->width;j++)
-                 //most significant byte first
-                 data2[ j + i * (data->width) ] = (int) get_num(pgmFile);
-
-     }
-
-     */
-
 
     //DEBUG
 
@@ -147,9 +117,9 @@ int encode(ImagePGM *data, char msg_text[]) {
         char toEncode = msg_text[k];
         //printf("\n Char to encode: %c\n",toEncode);
         for (int i = 0; i < 8; ++i) {
-            int bitToEncode = toEncode & (int) (pow(2, 7-i));
+            int bitToEncode = toEncode & (int) (pow(2, 7 - i));
             if (bitToEncode)
-                bitToEncode=1;
+                bitToEncode = 1;
             //printf("%d (%c:%d  ANDed with %d)",bitToEncode,toEncode,toEncode,(int) (pow(2, i)) );
             if (bitToEncode == 0)
                 data->pixels[height][width] &= 11111110;
@@ -170,9 +140,8 @@ int encode(ImagePGM *data, char msg_text[]) {
     return 1;
 }
 
-char *decode(ImagePGM *data)
-{
-    char* msg_text = (char*)malloc(100 * sizeof(char));
+char *decode(ImagePGM *data) {
+    char *msg_text = (char *) malloc(100 * sizeof(char));
     int msgIndex = 0;
 
     printf("\nDecoding PGM File...\n");
@@ -181,13 +150,13 @@ char *decode(ImagePGM *data)
     int hidden_pixels[8];
     int width = data->width - 1;
     int height = data->height - 1;
-    while(!decrypted) {
+    while (!decrypted) {
         int hidden = 0;
         //printf("\n Decrypting bits: ");
         for (int k = 0; k < 8; ++k) {
-            hidden_pixels[k] = data->pixels[height][width] & 00000001;
+            hidden_pixels[k] = data->pixels[height][width] & 1;
             //printf("%d ",hidden_pixels[k]);
-            hidden += (int) (pow(2,7-k) * hidden_pixels[k]);
+            hidden += (int) (pow(2, 7 - k) * hidden_pixels[k]);
             width--;
             if (width < 0) {
                 height--;

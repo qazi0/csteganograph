@@ -34,8 +34,4 @@ char *decode(ImagePGM *pImagePGM);
 void freePGM(ImagePGM *pImagePGM);
 
 
-
-
-
-
 #endif //STEGANOGRAPH_IMAGE_H
