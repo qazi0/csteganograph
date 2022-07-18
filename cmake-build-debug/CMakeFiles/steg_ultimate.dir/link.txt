@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/steg_ultimate.dir/main.c.o CMakeFiles/steg_ultimate.dir/image.c.o  -o steg_ultimate 

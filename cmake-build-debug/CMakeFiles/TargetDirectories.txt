@@ -1,3 +1,0 @@
-/home/siraj/CLionProjects/steg-ultimate/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/siraj/CLionProjects/steg-ultimate/cmake-build-debug/CMakeFiles/steg_ultimate.dir
-/home/siraj/CLionProjects/steg-ultimate/cmake-build-debug/CMakeFiles/edit_cache.dir
